@@ -22,7 +22,7 @@ namespace QPAD
                 System.IO.Directory.CreateDirectory(localAppDataPath);
             }
             NewVersionPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData) + @"\MUIA\QDBM\newver.exe";
-            CheckPage = "https://dl.dropboxusercontent.com/s/njhenmg4ufdtz81/update.html";
+            CheckPage = "https://dl.dropboxusercontent.com/s/2nq7yesdyy443ig/update.html";      
             RefreshCommand = new Command(Refresh);
             UpdateCommand = new Command(Update);
             Refresh();

@@ -24,7 +24,7 @@ namespace QPAD
         {
             Database = new DatabaseModel();
             Generator = new GeneratorModel();
-            Updater = new UpdaterModel(2015012700);
+            Updater = new UpdaterModel(000103);
         }
         #endregion
         #region Properties
