@@ -18,3 +18,9 @@ Check out the sample under comptersci>optiontest>level0>singleanswer for more in
 1).doc/.docx support.  
 2)remote hosting of database with encryption  
 3)dynamic locations as database (Currently only at Root_Folder/Databases/ )  
+
+**For Developers:**  
+Programming Language : C#  
+Architecture Pattern : MVVM 
+
+
