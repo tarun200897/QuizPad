@@ -1,0 +1,426 @@
+﻿<UserControl x:Class="QPAD.UserControls.QDBMRichTextBox"
+              x:Name="QDBMRichTextBoxControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800">
+
+    <UserControl.Resources>
+
+        <!-- Flat Button -->
+        <ControlTemplate x:Key="FlatButtonControlTemplate" TargetType="{x:Type Button}">
+            <Border x:Name="OuterBorder" BorderBrush="Transparent" BorderThickness="1" CornerRadius="0">
+                <Border x:Name="InnerBorder" Background="Transparent" BorderBrush="Transparent" BorderThickness="1" CornerRadius="0">
+                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True" Margin="{TemplateBinding Padding}" />
+                </Border>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="OuterBorder" Property="BorderBrush" Value="#FF7CA0CC" />
+                    <Setter TargetName="InnerBorder" Property="BorderBrush" Value="#FFE4EFFD" />
+                    <Setter TargetName="InnerBorder" Property="Background" Value="#FFDAE7F5" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="OuterBorder" Property="BorderBrush" Value="#FF2E4E76" />
+                    <Setter TargetName="InnerBorder" Property="BorderBrush" Value="#FF116EE4" />
+                    <Setter TargetName="InnerBorder" Property="Background" Value="#FF3272B8" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <!-- Flat Toggle Button -->
+        <ControlTemplate x:Key="FlatToggleButtonControlTemplate" TargetType="{x:Type ToggleButton}">
+            <Border x:Name="OuterBorder" BorderBrush="Transparent" BorderThickness="1" CornerRadius="0">
+                <Border x:Name="InnerBorder" Background="Transparent" BorderBrush="Transparent" BorderThickness="1" CornerRadius="0">
+                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True" Margin="{TemplateBinding Padding}" />
+                </Border>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="OuterBorder" Property="BorderBrush" Value="#FF7CA0CC" />
+                    <Setter TargetName="InnerBorder" Property="BorderBrush" Value="#FFE4EFFD" />
+                    <Setter TargetName="InnerBorder" Property="Background" Value="#FFDAE7F5" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="OuterBorder" Property="BorderBrush" Value="#FF2E4E76" />
+                    <Setter TargetName="InnerBorder" Property="BorderBrush" Value="#FF116EE4" />
+                    <Setter TargetName="InnerBorder" Property="Background" Value="#FF3272B8" />
+                </Trigger>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter TargetName="OuterBorder" Property="BorderBrush" Value="#FF1e51ff" />
+                    <Setter TargetName="InnerBorder" Property="BorderBrush" Value="#FF1e90ff" />
+                    <Setter TargetName="InnerBorder" Property="Background" Value="#33FFFFFF" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+    </UserControl.Resources>
+
+    <DockPanel LastChildFill="True" >
+        <Border 
+            DockPanel.Dock="Top" 
+            BorderThickness="{Binding ElementName=QDBMRichTextBoxControl, Path=ToolbarBorderThickness}" 
+            BorderBrush="{Binding ElementName=QDBMRichTextBoxControl, Path=ToolbarBorderBrush}" 
+            SnapsToDevicePixels="True" >
+            <StackPanel Orientation="Horizontal" Height="35" Background="{Binding ElementName=QDBMRichTextBoxControl, Path=ToolbarBackground}" >
+
+                <!-- Font drop-down code from http://www.bennedik.de/2007/10/wpf-fast-font-drop-down-list.html -->
+
+                <!-- Font family combo box  -->
+                <ComboBox x:Name="FontFamilyCombo" Height="23" Width="100"  Margin="5,2,0,2" IsEditable="True" SelectionChanged="OnFontFamilyComboSelectionChanged">
+                    <ComboBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel Width="250" />
+                        </ItemsPanelTemplate>
+                    </ComboBox.ItemsPanel>
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" FontFamily="{Binding}" FontSize="15" Height="20"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                <!-- Font size combo box -->
+                <ComboBox x:Name="FontSizeCombo" Height="23" Width="40" Margin="5,2,5,2" IsEditable="True" SelectionChanged="OnFontSizeComboSelectionChanged" />
+
+                <Button Command="ApplicationCommands.Cut" CommandTarget="{Binding ElementName=TextBox}" ToolTip="Cut" Template="{StaticResource FlatButtonControlTemplate}" Margin="0,1,0,1" Foreground="Black">
+                    <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="16" Height="16">
+                        <Grid>
+                            <Grid Name="backgroundGrid" Visibility="Collapsed" />
+                            <Path Data="M26.93272,40.905998L26.451015,41.976318 24.699699,46.260094 24.439299,46.437298 21.630575,52.664005C21.368874,53.533619 21.357073,54.478939 21.699675,55.054646 22.090179,55.712357 23.079786,56.020966 24.280296,55.861763 26.486116,55.570259 29.517443,53.617123 30.788252,49.075542 31.509558,46.499798 31.469257,44.511963 30.671051,43.16914 29.822144,41.747314 28.163231,41.153507 26.93272,40.905998z M11.809452,21.572449C8.7251377,21.600742 6.5700688,22.9643 5.5466814,24.369844 4.210753,26.208536 4.8657231,27.786457 7.3722467,28.260103L14.150891,28.755148 14.254991,28.702854 15.780988,28.872335 19.955578,29.176001C20.325277,27.981735 20.596077,26.236832 19.749779,24.812695 18.95038,23.469145 17.223885,22.487257 14.61439,21.891125 13.609521,21.661287 12.673059,21.564526 11.809452,21.572449z M43.601677,0L31.104164,30.593931 64,34.285347 55.42709,39.385468 38.033871,39.015766 31.391865,35.604153 29.14706,35.375153 28.790461,36.250156C30.869762,36.812656 33.401066,38.005566 34.957165,40.618874 36.48177,43.182285 36.69537,46.476799 35.591068,50.419617 33.666668,57.299545 28.55196,60.151161 24.841057,60.64336 21.628952,61.070564 18.648352,59.679455 17.22135,57.279045 16.519447,56.099339 16.921848,51.107117 16.990749,50.893318L18.683651,47.164303 23.837255,34.88295 11.005141,33.620747 6.8593082,33.422047C6.5311871,33.361946 1.6901219,31.174433 1.002491,30.01823 -0.4245705,27.617319 -0.39203876,24.054804 1.5142117,21.435192 3.7186239,18.408779 8.7628794,15.437566 15.726547,17.028872 19.718651,17.937576 22.511755,19.700785 24.036356,22.263296 25.624956,24.933706 25.423157,27.788721 24.901056,29.896128L25.817659,30.00013 26.742159,27.78722 26.984358,20.442987 35.029865,5.097682z" Stretch="Uniform" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5"
+                                  Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <TransformGroup.Children>
+                                            <RotateTransform Angle="0" />
+                                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                                        </TransformGroup.Children>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                        </Grid>
+                    </Viewbox>
+                </Button>
+
+                <Button Command="ApplicationCommands.Copy" CommandTarget="{Binding ElementName=TextBox}" ToolTip="Copy" Template="{StaticResource FlatButtonControlTemplate}" Margin="0,1,0,1" Foreground="Black">
+                    <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Height="16" Width="16">
+                        <Grid>
+                            <Path Data="M31.687001,23.116L31.687001,31.394341C31.687001,31.394341,31.526705,36.832023,25.52624,36.359949L18.506,36.388395 18.506,49.587002 18.506001,54.153999 18.506,59.292614C18.506,59.812107,18.929218,60.233997,19.448625,60.233997L45.808704,60.233997C46.326101,60.233997,46.749998,59.812107,46.749998,59.292614L46.749998,24.057384C46.749998,23.539322,46.326101,23.116,45.808704,23.116z M20.552001,4.5669994L20.552001,14.60861C20.552001,14.60861,20.358706,21.203206,13.080177,20.631915L4.565999,20.665694 4.565999,48.4459C4.566,49.076302,5.0797424,49.587002,5.7100554,49.587002L14.742001,49.587002 14.742001,35.400336 18.161097,31.792807 18.166127,31.774705 26.474542,22.972 26.521163,22.972 29.953973,19.349999 38.822001,19.349999 38.822001,5.7076302C38.822001,5.0806808,38.309198,4.5669994,37.680792,4.5669994z M18.449971,0L37.680651,0C40.833681,0,43.391001,2.5571156,43.391001,5.707489L43.391001,19.349999 45.80884,19.349999C48.409018,19.35,50.517,21.458894,50.517,24.05704L50.517,59.292992C50.517,61.893593,48.409018,64,45.80884,64L19.448812,64C16.849223,64,14.742,61.893593,14.742001,59.292992L14.742001,54.153999 5.709774,54.153999C2.555994,54.153999,0,51.599316,0,48.445534L0,19.465691 4.1473293,15.090039 4.1532602,15.068708 14.229262,4.3929996 14.286199,4.3929996z" Stretch="Uniform" Width="16" Height="16" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5"
+                                  Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <TransformGroup.Children>
+                                            <RotateTransform Angle="0" />
+                                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                                        </TransformGroup.Children>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                        </Grid>
+                    </Viewbox>
+                </Button>
+
+                <Button Command="ApplicationCommands.Paste" CommandTarget="{Binding ElementName=TextBox}" ToolTip="Paste" Template="{StaticResource FlatButtonControlTemplate}" Margin="0,1,0,1" Foreground="Black">
+                    <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="16" Height="16">
+                        <Grid>
+                            <Path Data="M31.948999,57.859001L45.188999,57.859001 45.188999,59.699001 31.948999,59.699001z M31.948999,51.950001L45.188999,51.950001 45.188999,53.791 31.948999,53.791z M28.396044,35.408001C28.009256,35.408001,27.689001,35.726357,27.689001,36.116974L27.689001,62.648006C27.689001,63.039406,28.009256,63.357002,28.396044,63.357002L48.248085,63.357002C48.638691,63.357002,48.957001,63.039406,48.957001,62.648006L48.957001,45.402447 43.671608,45.381203C39.153995,45.736,39.033001,41.642223,39.033001,41.642223L39.033001,35.408001z M28.395853,32.571999L40.336986,32.571999 42.92213,35.299999 42.958431,35.299999 49.212662,41.928822 49.216327,41.942017 51.790001,44.657917 51.790001,62.648022C51.790001,64.605804,50.204025,66.191002,48.247158,66.191002L28.395853,66.191002C26.438854,66.191002,24.853,64.605804,24.853,62.648022L24.853,36.116901C24.853,34.16061,26.438854,32.571999,28.395853,32.571999z M23.4165,2.7189999C21.472765,2.7190001 19.896,4.211246 19.896,6.0526261 19.896,7.8918042 21.472765,9.3859997 23.4165,9.3859997 25.360433,9.3859997 26.936998,7.8918042 26.936998,6.0526261 26.936998,4.211246 25.360433,2.7190001 23.4165,2.7189999z M23.4165,0C26.836176,0,29.627563,2.5418639,29.798687,5.7406974L29.806993,6.0519996 35.229999,6.0519996 35.229999,7.9879994 46.833999,7.9879994 46.833999,34.156097 41.895698,28.945999 41.695999,28.945999 41.695999,14.389 35.229999,14.389 35.229999,20.865 11.604001,20.865 11.604001,14.389 5.136998,14.389 5.136998,59.294998 21.228,59.294998 21.228,62.648151C21.228,63.142387,21.27823,63.625092,21.373855,64.091423L21.431106,64.338997 0,64.338997 0,7.9879994 11.604001,7.9879994 11.604001,6.0519996 17.026007,6.0519996 17.034315,5.7406974C17.205442,2.5418639,19.996919,0,23.4165,0z" Stretch="Uniform" Width="16" Height="16" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5"
+                                  Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <TransformGroup.Children>
+                                            <RotateTransform Angle="0" />
+                                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                                        </TransformGroup.Children>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                        </Grid>
+                    </Viewbox>
+                </Button>
+
+                <Button Command="ApplicationCommands.Undo" CommandTarget="{Binding ElementName=TextBox}" ToolTip="Undo" Template="{StaticResource FlatButtonControlTemplate}"  Margin="0,1,0,1" Foreground="Black">
+                    <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="16" Height="16">
+                        <Grid>
+                            <Path Data="F1M1146.68,2290.95C1147.82,2288.38 1149.41,2286.02 1151.46,2283.97 1155.82,2279.6 1161.62,2277.2 1167.8,2277.2 1173.97,2277.2 1179.78,2279.6 1184.14,2283.97 1188.5,2288.33 1190.91,2294.14 1190.91,2300.31 1190.91,2306.49 1188.5,2312.29 1184.14,2316.65 1183.44,2317.34 1182.53,2317.69 1181.62,2317.69 1180.71,2317.69 1179.8,2317.34 1179.1,2316.65 1177.72,2315.26 1177.72,2313.01 1179.11,2311.62 1182.13,2308.6 1183.8,2304.58 1183.8,2300.31 1183.8,2296.04 1182.13,2292.02 1179.1,2289 1176.09,2285.97 1172.07,2284.31 1167.8,2284.31 1163.52,2284.31 1159.51,2285.97 1156.48,2289 1154.24,2291.24 1152.76,2294.03 1152.13,2297.06L1159.8,2305.64 1137.57,2305.64 1139.35,2282.74 1146.68,2290.95z" Stretch="Uniform" Width="16" Height="16" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5"
+                                  Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <TransformGroup.Children>
+                                            <RotateTransform Angle="0" />
+                                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                                        </TransformGroup.Children>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                        </Grid>
+                    </Viewbox>
+                </Button>
+
+                <Button Command="ApplicationCommands.Redo" CommandTarget="{Binding ElementName=TextBox}" ToolTip="Redo" Template="{StaticResource FlatButtonControlTemplate}"  Margin="0,1,0,1" Foreground="Black">
+                    <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="16" Height="16">
+                        <Grid>
+                            <Path Data="F1M1182.69,1926.92C1181.55,1924.36 1179.96,1921.99 1177.91,1919.94 1173.55,1915.58 1167.74,1913.17 1161.57,1913.17 1155.39,1913.17 1149.59,1915.58 1145.23,1919.94 1140.86,1924.31 1138.46,1930.11 1138.46,1936.28 1138.46,1942.46 1140.86,1948.26 1145.23,1952.62 1145.92,1953.32 1146.83,1953.66 1147.74,1953.66 1148.65,1953.66 1149.56,1953.32 1150.26,1952.62 1151.64,1951.24 1151.64,1948.99 1150.26,1947.59 1147.23,1944.57 1145.57,1940.56 1145.57,1936.28 1145.57,1932.01 1147.23,1927.99 1150.26,1924.97 1153.28,1921.94 1157.29,1920.28 1161.57,1920.28 1165.84,1920.28 1169.86,1921.94 1172.88,1924.97 1175.12,1927.21 1176.61,1930 1177.23,1933.04L1169.57,1941.62 1191.79,1941.62 1190.01,1918.71 1182.69,1926.92z" Stretch="Uniform" Width="16" Height="16" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5"
+                                   Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <TransformGroup.Children>
+                                            <RotateTransform Angle="0" />
+                                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                                        </TransformGroup.Children>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                        </Grid>
+                    </Viewbox>
+                </Button>
+
+                <Image Source="Images\separator.png" Stretch="None" SnapsToDevicePixels="True" />
+
+                <ToggleButton x:Name="BoldButton" Command="EditingCommands.ToggleBold" CommandTarget="{Binding ElementName=TextBox}" ToolTip="Bold" Template="{StaticResource FlatToggleButtonControlTemplate}" Margin="0,1,0,1">
+                    <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="13" Height="13">
+                        <Grid>
+                            <Path Data="F1M-240.817,-5140.75L-215.236,-5140.75C-210.17,-5140.75 -206.394,-5140.54 -203.906,-5140.12 -201.417,-5139.7 -199.189,-5138.82 -197.225,-5137.48 -195.261,-5136.14 -193.624,-5134.36 -192.314,-5132.13 -191.003,-5129.9 -190.351,-5127.41 -190.351,-5124.64 -190.351,-5121.65 -191.158,-5118.9 -192.771,-5116.39 -194.389,-5113.89 -196.579,-5112.01 -199.342,-5110.76 -195.443,-5109.62 -192.446,-5107.69 -190.351,-5104.95 -188.253,-5102.22 -187.208,-5099 -187.208,-5095.3 -187.208,-5092.39 -187.883,-5089.56 -189.236,-5086.81 -190.589,-5084.06 -192.439,-5081.86 -194.781,-5080.22 -197.124,-5078.58 -200.014,-5077.56 -203.446,-5077.19 -205.6,-5076.95 -210.796,-5076.81 -219.032,-5076.75L-240.817,-5076.75 -240.817,-5140.75z M-227.897,-5130.1L-227.897,-5115.3 -219.426,-5115.3C-214.391,-5115.3 -211.264,-5115.37 -210.041,-5115.52 -207.829,-5115.78 -206.088,-5116.54 -204.822,-5117.81 -203.557,-5119.07 -202.923,-5120.74 -202.923,-5122.81 -202.923,-5124.79 -203.469,-5126.39 -204.561,-5127.63 -205.652,-5128.87 -207.275,-5129.62 -209.426,-5129.88 -210.708,-5130.03 -214.391,-5130.1 -220.473,-5130.1L-227.897,-5130.1z M-227.897,-5104.65L-227.897,-5087.53 -215.933,-5087.53C-211.277,-5087.53 -208.324,-5087.67 -207.071,-5087.93 -205.15,-5088.28 -203.587,-5089.13 -202.377,-5090.48 -201.17,-5091.83 -200.564,-5093.65 -200.564,-5095.92 -200.564,-5097.84 -201.032,-5099.47 -201.964,-5100.81 -202.895,-5102.14 -204.24,-5103.12 -205.999,-5103.73 -207.761,-5104.34 -211.583,-5104.65 -217.46,-5104.65L-227.897,-5104.65z" Stretch="Uniform" Width="16" Height="16" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5"
+                                   Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ToggleButton}}}">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <TransformGroup.Children>
+                                            <RotateTransform Angle="0" />
+                                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                                        </TransformGroup.Children>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                        </Grid>
+                    </Viewbox>
+
+                </ToggleButton>
+
+                <ToggleButton x:Name="ItalicButton" Command="EditingCommands.ToggleItalic" CommandTarget="{Binding ElementName=TextBox}" ToolTip="Italic" Template="{StaticResource FlatToggleButtonControlTemplate}" Margin="0,1,0,1">
+                    <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="13" Height="13">
+                        <Grid>
+                            <Path Data="F1M-208.49,-4719.89L-209.008,-4718.14 -235.346,-4718.14 -234.683,-4719.89C-232.041,-4719.95 -230.295,-4720.17 -229.447,-4720.55 -228.062,-4721.08 -227.04,-4721.82 -226.376,-4722.77 -225.339,-4724.25 -224.27,-4726.89 -223.17,-4730.7L-212.029,-4769.31C-211.085,-4772.52 -210.614,-4774.94 -210.614,-4776.58 -210.614,-4777.39 -210.817,-4778.08 -211.226,-4778.65 -211.639,-4779.22 -212.256,-4779.65 -213.091,-4779.95 -213.926,-4780.25 -215.554,-4780.4 -217.977,-4780.4L-217.409,-4782.14 -192.679,-4782.14 -193.197,-4780.4C-195.213,-4780.43 -196.706,-4780.21 -197.682,-4779.74 -199.097,-4779.11 -200.174,-4778.21 -200.916,-4777.04 -201.654,-4775.88 -202.606,-4773.3 -203.77,-4769.31L-214.863,-4730.7C-215.868,-4727.14 -216.373,-4724.88 -216.373,-4723.9 -216.373,-4723.11 -216.175,-4722.45 -215.782,-4721.89 -215.389,-4721.34 -214.761,-4720.92 -213.891,-4720.62 -213.031,-4720.32 -211.226,-4720.08 -208.49,-4719.89z" Stretch="Uniform" Width="16" Height="16" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5"
+                                   Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ToggleButton}}}">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <TransformGroup.Children>
+                                            <RotateTransform Angle="0" />
+                                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                                        </TransformGroup.Children>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                        </Grid>
+                    </Viewbox>
+                </ToggleButton>
+
+                <ToggleButton x:Name="UnderlineButton" Command="EditingCommands.ToggleUnderline" CommandTarget="{Binding ElementName=TextBox}" ToolTip="Underline" Template="{StaticResource FlatToggleButtonControlTemplate}" Margin="0,1,0,1">
+                    <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="13" Height="13">
+                        <Grid>
+                            <Path Data="M2.1350004,55.547001L44.801998,55.547001 44.801998,63.547001 2.1350004,63.547001z M0,0L21.950499,0 21.950499,6.2215548 19.791699,6.2215548C18.802098,6.2215543 18.098999,6.3387351 17.679699,6.5770268 17.260498,6.8139591 16.954498,7.1511827 16.760498,7.5913162 16.567698,8.0300999 16.471499,8.9273272 16.471499,10.281389L16.471499,26.657932C16.471499,29.709959 16.777298,31.987379 17.390698,33.491291 18.003998,34.995106 18.929699,36.138512 20.167998,36.924919 21.406298,37.707428 22.907599,38.100632 24.674498,38.100632 26.438799,38.100632 28.010498,37.669727 29.389298,36.810421 30.766897,35.950813 31.749998,34.861107 32.342495,33.538193 32.936196,32.216579 33.231896,30.032961 33.231896,26.980734L33.231896,8.9273272C33.231896,8.1773214 33.135395,7.6407561 32.942795,7.317874 32.684895,6.8868399 32.339798,6.588737 31.910198,6.415586 31.609499,6.2866149 30.846398,6.2215543 29.622399,6.2215548L27.880198,6.2215548 27.880198,0 46.447998,0 46.447998,6.2215548 44.997498,6.2215548C43.557297,6.2215543 42.664097,6.306025 42.322895,6.4793062 41.805996,6.7371187 41.429695,7.1134019 41.192795,7.6082163 41.020897,7.931159 40.934895,8.8218565 40.934895,10.281389L40.934895,28.011944C40.934895,31.278973 40.463597,34.016098 39.518196,36.229515 38.205696,39.241344 36.117195,41.577362 33.248795,43.242577 30.377598,44.908089 26.977898,45.739998 23.046898,45.739998 20.274798,45.739998 17.791699,45.315594 15.600299,44.467884 13.408899,43.61758 11.489599,42.404072 9.846409,40.823254 8.2032196,39.244041 7.0534698,37.575928 6.3985302,35.810413 5.7422797,34.048599 5.41415,31.448273 5.4141504,28.011944L5.4141504,10.636892C5.41415,9.0483589 5.3281295,8.0222292 5.1562497,7.5587158 4.9843795,7.0977821 4.7057197,6.7579288 4.3177192,6.5443072 3.93106,6.3295851 3.1797199,6.2215543 2.0625305,6.2215548L0,6.2215548z" Stretch="Uniform" Width="16" Height="16" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5"
+                                   Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ToggleButton}}}">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <TransformGroup.Children>
+                                            <RotateTransform Angle="0" />
+                                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                                        </TransformGroup.Children>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                        </Grid>
+                    </Viewbox>
+                </ToggleButton>
+                <Image Source="Images\separator.png" Stretch="None" SnapsToDevicePixels="True" />
+
+                <Button ToolTip="Format as normal (non-code) text" Template="{StaticResource FlatButtonControlTemplate}" Margin="0,1,0,1" Visibility="{Binding Path=CodeControlsVisibility, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Click="OnNormalTextClick">
+                    <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="13" Height="13">
+                        <Grid>
+                            <Path Data="M0,0L56.621998,0 56.621998,14.472 35.715999,14.472 35.715999,64 20.716999,64 20.716999,14.472 0,14.472z" Stretch="Uniform" Width="16" Height="16" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5"
+                                   Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <TransformGroup.Children>
+                                            <RotateTransform Angle="0" />
+                                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                                        </TransformGroup.Children>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                        </Grid>
+                    </Viewbox>
+                </Button>
+
+                <Button ToolTip="Format as code block" Template="{StaticResource FlatButtonControlTemplate}" Margin="0,1,0,1" Visibility="{Binding Path=CodeControlsVisibility, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Click="OnCodeBlockClick">
+                    <Image Source="Images\codeblock.png" Stretch="None" SnapsToDevicePixels="True" />
+                </Button>
+
+                <Button ToolTip="Format as inline code" Template="{StaticResource FlatButtonControlTemplate}" Margin="0,1,0,1" Visibility="{Binding Path=CodeControlsVisibility, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Click="OnInlineCodeClick">
+                    <Image Source="Images\codeinline.png" Stretch="None" SnapsToDevicePixels="True" />
+                </Button>
+
+                <Image Source="Images\separator.png" Stretch="None" SnapsToDevicePixels="True" Visibility="{Binding Path=CodeControlsVisibility, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" />
+
+                <ToggleButton x:Name="LeftButton" Command="EditingCommands.AlignLeft" CommandTarget="{Binding ElementName=TextBox}" ToolTip="Align Left" Template="{StaticResource FlatToggleButtonControlTemplate}" Margin="0,1,0,1" Click="OnAlignmentButtonClick">
+                    <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="16" Height="16">
+                        <Grid>
+                            <Path Data="M0,57.655001L67.002998,57.655001 67.002998,64.000002 0,64.000002z M0,42.505001L38.098999,42.505001 38.098999,48.85 0,48.85z M0,28.294L67.002998,28.294 67.002998,34.639 0,34.639z M0,14.143001L38.098999,14.143001 38.098999,20.488001 0,20.488001z M0,0L67.002998,0 67.002998,6.3460007 0,6.3460007z" Stretch="Uniform" Width="16" Height="16" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5"
+                                   Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ToggleButton}}}">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <TransformGroup.Children>
+                                            <RotateTransform Angle="0" />
+                                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                                        </TransformGroup.Children>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                        </Grid>
+                    </Viewbox>
+                </ToggleButton>
+
+                <ToggleButton x:Name="CenterButton" Command="EditingCommands.AlignCenter" CommandTarget="{Binding ElementName=TextBox}" ToolTip="Align Center" Template="{StaticResource FlatToggleButtonControlTemplate}" Margin="0,1,0,1" Click="OnAlignmentButtonClick">
+                    <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="16" Height="16">
+                        <Grid>
+                            <Path Data="M0,57.653999L67.001999,57.653999 67.001999,64 0,64z M14.452,42.504L52.550999,42.504 52.550999,48.849998 14.452,48.849998z M0,28.292999L67.001999,28.292999 67.001999,34.638 0,34.638z M14.452,14.143L52.550999,14.143 52.550999,20.487999 14.452,20.487999z M0,0L67.001999,0 67.001999,6.3449993 0,6.3449993z" Stretch="Uniform" Width="16" Height="16" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5"
+                                   Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ToggleButton}}}">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <TransformGroup.Children>
+                                            <RotateTransform Angle="0" />
+                                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                                        </TransformGroup.Children>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                        </Grid>
+                    </Viewbox>
+                </ToggleButton>
+
+                <ToggleButton x:Name="RightButton" Command="EditingCommands.AlignRight" CommandTarget="{Binding ElementName=TextBox}" ToolTip="Align Right" Template="{StaticResource FlatToggleButtonControlTemplate}" Margin="0,1,0,1" Click="OnAlignmentButtonClick">
+                    <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="16" Height="16">
+                        <Grid>
+                            <Path Data="M0,57.653999L67.002998,57.653999 67.002998,63.999001 0,63.999001z M28.903999,42.504L67.002998,42.504 67.002998,48.849998 28.903999,48.849998z M0,28.293L67.002998,28.293 67.002998,34.637999 0,34.637999z M28.903999,14.143L67.002998,14.143 67.002998,20.486999 28.903999,20.486999z M0,0L67.002998,0 67.002998,6.3449993 0,6.3449993z"
+                                  Stretch="Uniform" Width="16" Height="16" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5"
+                                   Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ToggleButton}}}">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <TransformGroup.Children>
+                                            <RotateTransform Angle="0" />
+                                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                                        </TransformGroup.Children>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                        </Grid>
+                    </Viewbox>
+                </ToggleButton>
+
+                <ToggleButton x:Name="JustifyButton" Command="EditingCommands.AlignJustify" CommandTarget="{Binding ElementName=TextBox}" ToolTip="Align Justify" Template="{StaticResource FlatToggleButtonControlTemplate}" Margin="0,1,0,1" Click="OnAlignmentButtonClick">
+                    <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="16" Height="16">
+                        <Grid>
+                            <Path Data="M0,57.653999L67.001999,57.653999 67.001999,64 0,64z M0,42.504999L67.001999,42.504999 67.001999,48.849998 0,48.849998z M0,28.292999L67.001999,28.292999 67.001999,34.638 0,34.638z M0,14.143L67.001999,14.143 67.001999,20.487999 0,20.487999z M0,0L67.001999,0 67.001999,6.3449993 0,6.3449993z" 
+                            Stretch="Uniform" Width="16" Height="16" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5"
+                                   Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ToggleButton}}}">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <TransformGroup.Children>
+                                            <RotateTransform Angle="0" />
+                                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                                        </TransformGroup.Children>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                        </Grid>
+                    </Viewbox>
+                </ToggleButton>
+                <Image Source="Images\separator.png" Stretch="None" SnapsToDevicePixels="True" />
+
+                <ToggleButton x:Name="BulletsButton" Command="EditingCommands.ToggleBullets" CommandTarget="{Binding ElementName=TextBox}" ToolTip="Bullets" Template="{StaticResource FlatToggleButtonControlTemplate}"  Margin="0,1,0,1" Click="OnListButtonClick">
+                    <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="16" Height="16">
+                        <Grid>
+                            <Path Data="M16.601999,35.746L63.891998,35.746 63.891998,41.008001 16.601999,41.008001z M0,34.764L9.3609999,34.764 9.3609999,42.786001 0,42.786001z M16.601999,18.359L64,18.359 64,23.620001 16.601999,23.620001z M0,17.381001L9.3609999,17.381001 9.3609999,25.404 0,25.404z M16.601999,1.6640005L63.891998,1.6640005 63.891998,6.9280005 16.601999,6.9280005z M0,0L9.3609999,0 9.3609999,8.0220003 0,8.0220003z"
+                                  Stretch="Uniform" Width="16" Height="16" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5"
+                                   Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ToggleButton}}}">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <TransformGroup.Children>
+                                            <RotateTransform Angle="0" />
+                                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                                        </TransformGroup.Children>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                        </Grid>
+                    </Viewbox>
+                </ToggleButton>
+
+                <ToggleButton x:Name="NumberingButton" Command="EditingCommands.ToggleNumbering" CommandTarget="{Binding ElementName=TextBox}" ToolTip="Numbering" Template="{StaticResource FlatToggleButtonControlTemplate}"  Margin="0,1,0,1" Click="OnListButtonClick">
+                    <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="16" Height="16">
+                        <Grid>
+                            <Path Data="M16.354,37.501999L63.891998,37.501999 63.891998,42.792 16.354,42.792z M3.6277113,34.931998C4.6850672,34.931998 5.5340252,35.270601 6.1720867,35.945007 6.6993542,36.495712 6.9651728,37.119518 6.9651728,37.814823 6.9651728,38.801832 6.4234047,39.58954 5.3465195,40.176846 5.9897909,40.314846 6.5054379,40.624748 6.8895407,41.105352 7.2763634,41.584358 7.4689999,42.166563 7.4689999,42.846169 7.4689999,43.831778 7.1108379,44.672886 6.3895235,45.368292 5.6681595,46.063698 4.7709093,46.41 3.696744,46.41 2.6784697,46.41 1.8360014,46.117098 1.1653194,45.532393 0.49742317,44.947687 0.10806656,44.182081 0,43.236773L2.0873804,42.982969C2.1524124,43.515375 2.3320179,43.920378 2.6224976,44.202881 2.9141579,44.484083 3.2670498,44.624784 3.6811829,44.624784 4.1265078,44.624784 4.5001507,44.454283 4.8047609,44.11828 5.1096411,43.779778 5.2605257,43.326674 5.2605257,42.752367 5.2605257,42.210863 5.1148214,41.781059 4.8243818,41.465956 4.5326214,41.148153 4.1771402,40.989452 3.7593155,40.989452 3.4819565,40.989452 3.1538258,41.042753 2.7683125,41.152153L3.0079107,39.395538C3.59128,39.409939 4.0352955,39.283636 4.3413057,39.014135 4.6486855,38.747131 4.8009405,38.390329 4.8009405,37.945024 4.8009405,37.568722 4.6889668,37.26532 4.4650898,37.041416 4.2383318,36.814816 3.9402218,36.702814 3.5665293,36.702814 3.1981068,36.702814 2.8842163,36.831715 2.6224976,37.085617 2.3633595,37.34222 2.2044239,37.715923 2.1486025,38.206728L0.16275597,37.869524C0.30079079,37.188618 0.50782967,36.645514 0.78771591,36.24061 1.0652256,35.833106 1.453269,35.512803 1.9544153,35.282301 2.4506121,35.047899 3.0092907,34.931998 3.6277113,34.931998z M16.354,20.025L64,20.025 64,25.313999 16.354,25.313999z M4.0536337,16.723999C5.1824293,16.723999 6.0679655,17.028699 6.7152109,17.635499 7.3570776,18.244999 7.6800003,19.001399 7.6800003,19.905099 7.6800003,20.419399 7.5888367,20.910299 7.4040194,21.375099 7.2190418,21.8399 6.9272795,22.3283 6.5275135,22.8361 6.2619734,23.1746 5.7840738,23.6603 5.0927353,24.2956 4.4012079,24.9286 3.96241,25.3505 3.7774029,25.558701 3.5952053,25.7657 3.4454489,25.9689 3.3295746,26.166901L7.6800003,26.166901 7.6800003,28.202001 0,28.202001C0.081943512,27.4324 0.33195305,26.7032 0.74743652,26.0145 1.1641073,25.327 1.9857702,24.4128 3.2136602,23.273499 4.1992998,22.3543 4.8047943,21.7306 5.028863,21.401099 5.3321552,20.949399 5.4820614,20.502699 5.4820614,20.059999 5.4820614,19.573099 5.3504658,19.196699 5.0887356,18.933799 4.8257847,18.672099 4.4611206,18.541799 4.0001612,18.5418 3.5418034,18.541799 3.1798182,18.677199 2.9076777,18.954499 2.6380463,19.229199 2.4805698,19.686299 2.4401884,20.3256L0.25782394,20.108199C0.38682556,18.902499 0.79559517,18.036599 1.4819002,17.511899 2.166748,16.987099 3.0262423,16.723999 4.0536337,16.723999z M16.354,3.2449989L63.891998,3.2449989 63.891998,8.5349998 16.354,8.5349998z M3.2433262,0L5.0220003,0 5.0220003,11.478 2.8306465,11.478 2.8306465,3.2199974C2.0286074,3.9673252,1.0859118,4.5207891,0,4.8814821L0,2.8931847C0.57151794,2.7043724 1.1913795,2.3514309 1.8646021,1.828146 2.5337744,1.3071404 2.9947023,0.69653893 3.2433262,0z"
+                                  Stretch="Uniform" Width="16" Height="16" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5"
+                                  Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ToggleButton}}}">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <TransformGroup.Children>
+                                            <RotateTransform Angle="0" />
+                                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                                        </TransformGroup.Children>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                        </Grid>
+                    </Viewbox>
+                </ToggleButton>
+
+                <Image Source="Images\separator.png" Stretch="None" />
+
+                <Button Command="EditingCommands.IncreaseIndentation" CommandTarget="{Binding ElementName=TextBox}" ToolTip="Increase Indentation" Template="{StaticResource FlatButtonControlTemplate}"  Margin="0,1,0,1">
+                    <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="16" Height="16">
+                        <Grid>
+                            <Path Data="M30.867001,34.911001L64,34.911001 64,38.596001 30.867001,38.596001z M10.802,34.911001L27.246,34.911001 27.246,38.596001 10.802,38.596001z M30.867001,22.215L53.019001,22.215 53.019001,25.9 30.867001,25.9z M30.867001,11.158001L64,11.158001 64,14.844002 30.867001,14.844002z M15.633257,7.5160007L27.719,19.598523 27.700293,19.617208 27.719,19.635897 15.633257,31.722 12.296001,28.379066 18.691315,21.983 0,21.983 0,17.263 18.705013,17.263 12.296001,10.85131z M30.867001,0.10099983L64,0.10099983 64,3.7859993 30.867001,3.7859993z M10.802,0L27.246,0 27.246,3.6850014 10.802,3.6850014z"
+                                  Stretch="Uniform" Fill="#FF000000" Width="16" Height="16" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <TransformGroup.Children>
+                                            <RotateTransform Angle="0" />
+                                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                                        </TransformGroup.Children>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                        </Grid>
+                    </Viewbox>
+                </Button>
+
+                <Button Command="EditingCommands.DecreaseIndentation" CommandTarget="{Binding ElementName=TextBox}" ToolTip="Decrease Indentation" Template="{StaticResource FlatButtonControlTemplate}"  Margin="0,1,0,1" Foreground="Black">
+                    <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="16" Height="16">
+                        <Grid>
+                            <Path Data="M36.753998,34.911001L53.197998,34.911001 53.197998,38.596001 36.753998,38.596001z M0,34.911001L33.132998,34.911001 33.132998,38.596001 0,38.596001z M10.979998,22.215001L33.132998,22.215001 33.132998,25.900001 10.979998,25.900001z M0,11.158001L33.132998,11.158001 33.132998,14.844001 0,14.844001z M48.366841,7.5160007L51.703999,10.851288 45.294981,17.263001 63.999998,17.263001 63.999998,21.983001 45.308691,21.983001 51.703999,28.379066 48.366842,31.722001 36.280998,19.635898 36.299745,19.61717 36.280998,19.598444z M0,0.10100174L33.132998,0.10100174 33.132998,3.7860012 0,3.7860012z M36.753998,0L53.197998,0 53.197998,3.6850004 36.753998,3.6850004z" 
+                                  Stretch="Uniform" Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" Width="16" Height="16" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <TransformGroup.Children>
+                                            <RotateTransform Angle="0" />
+                                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                                        </TransformGroup.Children>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                        </Grid>
+                    </Viewbox>
+                </Button>
+
+            </StackPanel>
+        </Border>
+        <RichTextBox x:Name="TextBox" TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="Aliased" 
+                     AcceptsTab="True" AcceptsReturn="True" 
+                     IsEnabled="{Binding Path=IsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                     TextChanged="OnTextChanged" VerticalScrollBarVisibility="Auto" 
+                     SelectionChanged="OnTextBoxSelectionChanged" 
+                     Background="{Binding Path=Background, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" />
+    </DockPanel>
+</UserControl>
+

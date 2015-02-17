@@ -1,0 +1,75 @@
+C:\Users\Tarun\Desktop\Projects\QDBM\QDBM\bin\Debug\QDBM.exe.config
+C:\Users\Tarun\Desktop\Projects\QDBM\QDBM\bin\Debug\QDBM.exe
+C:\Users\Tarun\Desktop\Projects\QDBM\QDBM\bin\Debug\QDBM.pdb
+C:\Users\Tarun\Desktop\Projects\QDBM\QDBM\obj\Debug\QDBM.csprojResolveAssemblyReference.cache
+C:\Users\Tarun\Desktop\Projects\QDBM\QDBM\obj\Debug\MainWindow.baml
+C:\Users\Tarun\Desktop\Projects\QDBM\QDBM\obj\Debug\MainWindow.g.cs
+C:\Users\Tarun\Desktop\Projects\QDBM\QDBM\obj\Debug\App.g.cs
+C:\Users\Tarun\Desktop\Projects\QDBM\QDBM\obj\Debug\QDBM_MarkupCompile.cache
+C:\Users\Tarun\Desktop\Projects\QDBM\QDBM\obj\Debug\QDBM.g.resources
+C:\Users\Tarun\Desktop\Projects\QDBM\QDBM\obj\Debug\QDBM.Properties.Resources.resources
+C:\Users\Tarun\Desktop\Projects\QDBM\QDBM\obj\Debug\QDBM.csproj.GenerateResource.Cache
+C:\Users\Tarun\Desktop\Projects\QDBM\QDBM\obj\Debug\QDBM.exe
+C:\Users\Tarun\Desktop\Projects\QDBM\QDBM\obj\Debug\QDBM.pdb
+C:\Users\Tarun\Desktop\Projects\QDBM\QDBM\obj\Debug\Styles\TabStyle.baml
+C:\Users\Tarun\Desktop\Projects\QDBM\QDBM\obj\Debug\App.baml
+C:\Users\Tarun\Desktop\Projects\QDBM\QDBM\obj\Debug\Styles\ComboBoxStyle.baml
+C:\Users\Tarun\Desktop\Projects\QDBM\QDBM\obj\Debug\Styles\ButtonStyle.baml
+C:\Users\Tarun\Desktop\Projects\QDBM\QDBM\obj\Debug\addtopic.baml
+C:\Users\Tarun\Desktop\Projects\QDBM\QDBM\obj\Debug\Styles\ToggleButtonStyle.baml
+C:\Users\Tarun\Desktop\Projects\QDBM\QDBM\obj\Debug\addtopic.g.cs
+C:\Users\Tarun\Desktop\Projects\QDBM\QDBM\obj\Debug\UserControls\QdbmRichTextBox.baml
+C:\Users\Tarun\Desktop\Projects\QDBM\QDBM\obj\Debug\UserControls\QdbmRichTextBox.g.cs
+C:\Users\Tarun\Desktop\Projects\QDBM\QDBM\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Tarun\Desktop\Projects\QDBM\QDBM\obj\Debug\QDBM_MarkupCompile.lref
+C:\Users\Tarun\Desktop\Projects\QDBM\QDBM\obj\Debug\Styles\ScrollBarStyle.baml
+G:\Programming\My Projects\QDBM\QDBM\bin\Debug\QDBM.exe.config
+G:\Programming\My Projects\QDBM\QDBM\obj\Debug\QDBM.exe
+G:\Programming\My Projects\QDBM\QDBM\obj\Debug\QDBM.pdb
+G:\Programming\My Projects\QDBM\QDBM\bin\Debug\QDBM.exe
+G:\Programming\My Projects\QDBM\QDBM\bin\Debug\QDBM.pdb
+G:\Programming\My Projects\QDBM\QDBM\obj\Debug\QDBM.csprojResolveAssemblyReference.cache
+G:\Programming\My Projects\QDBM\QDBM\obj\Debug\addtopic.baml
+G:\Programming\My Projects\QDBM\QDBM\obj\Debug\Styles\ButtonStyle.baml
+G:\Programming\My Projects\QDBM\QDBM\obj\Debug\Styles\ComboBoxStyle.baml
+G:\Programming\My Projects\QDBM\QDBM\obj\Debug\Styles\ScrollBarStyle.baml
+G:\Programming\My Projects\QDBM\QDBM\obj\Debug\Styles\TabStyle.baml
+G:\Programming\My Projects\QDBM\QDBM\obj\Debug\Styles\ToggleButtonStyle.baml
+G:\Programming\My Projects\QDBM\QDBM\obj\Debug\UserControls\QDBMRichTextBox.baml
+G:\Programming\My Projects\QDBM\QDBM\obj\Debug\App.baml
+G:\Programming\My Projects\QDBM\QDBM\obj\Debug\addtopic.g.cs
+G:\Programming\My Projects\QDBM\QDBM\obj\Debug\MainWindow.g.cs
+G:\Programming\My Projects\QDBM\QDBM\obj\Debug\UserControls\QDBMRichTextBox.g.cs
+G:\Programming\My Projects\QDBM\QDBM\obj\Debug\App.g.cs
+G:\Programming\My Projects\QDBM\QDBM\obj\Debug\GeneratedInternalTypeHelper.g.cs
+G:\Programming\My Projects\QDBM\QDBM\obj\Debug\QDBM_MarkupCompile.cache
+G:\Programming\My Projects\QDBM\QDBM\obj\Debug\QDBM_MarkupCompile.lref
+G:\Programming\My Projects\QDBM\QDBM\obj\Debug\MainWindow.baml
+G:\Programming\My Projects\QDBM\QDBM\obj\Debug\QDBM.g.resources
+G:\Programming\My Projects\QDBM\QDBM\obj\Debug\QDBM.Properties.Resources.resources
+G:\Programming\My Projects\QDBM\QDBM\obj\Debug\QDBM.csproj.GenerateResource.Cache
+J:\Programming\My Projects\QDBM\QDBM\bin\Debug\QDBM.exe.config
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\QDBM.exe
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\QDBM.pdb
+J:\Programming\My Projects\QDBM\QDBM\bin\Debug\QDBM.exe
+J:\Programming\My Projects\QDBM\QDBM\bin\Debug\QDBM.pdb
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\addtopic.baml
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\Styles\ButtonStyle.baml
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\Styles\ComboBoxStyle.baml
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\Styles\ScrollBarStyle.baml
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\Styles\TabStyle.baml
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\Styles\ToggleButtonStyle.baml
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\UserControls\QDBMRichTextBox.baml
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\App.baml
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\addtopic.g.cs
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\MainWindow.g.cs
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\UserControls\QDBMRichTextBox.g.cs
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\App.g.cs
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\GeneratedInternalTypeHelper.g.cs
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\QDBM_MarkupCompile.cache
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\QDBM_MarkupCompile.lref
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\MainWindow.baml
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\QDBM.g.resources
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\QDBM.Properties.Resources.resources
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\QDBM.csproj.GenerateResource.Cache
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\QDBM.csprojResolveAssemblyReference.cache

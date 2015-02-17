@@ -1,0 +1,28 @@
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\addtopic.baml
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\Styles\ButtonStyle.baml
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\Styles\ComboBoxStyle.baml
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\Styles\ScrollBarStyle.baml
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\Styles\ToggleButtonStyle.baml
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\UserControls\QDBMRichTextBox.baml
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\App.baml
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\addtopic.g.cs
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\MainWindow.g.cs
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\UserControls\QDBMRichTextBox.g.cs
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\App.g.cs
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\GeneratedInternalTypeHelper.g.cs
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\MainWindow.baml
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\Styles\TabStyle.baml
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\QPAD.Properties.Resources.resources
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\QPAD.csproj.GenerateResource.Cache
+J:\Programming\My Projects\QDBM\QDBM\bin\Debug\QPAD.exe.config
+J:\Programming\My Projects\QDBM\QDBM\bin\Debug\QPAD.exe
+J:\Programming\My Projects\QDBM\QDBM\bin\Debug\QPAD.pdb
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\QPAD_MarkupCompile.cache
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\QPAD_MarkupCompile.lref
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\QPAD.g.resources
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\QPAD.exe
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\QPAD.pdb
+J:\Programming\My Projects\QDBM\QDBM\obj\Debug\QPAD.csprojResolveAssemblyReference.cache
+C:\Users\Tarun\Documents\GitHub\QuizPad\QDBM\bin\Debug\QPAD.exe.config
+C:\Users\Tarun\Documents\GitHub\QuizPad\QDBM\obj\Debug\QPAD.exe
+C:\Users\Tarun\Documents\GitHub\QuizPad\QDBM\obj\Debug\QPAD.pdb
