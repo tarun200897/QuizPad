@@ -1,0 +1,22 @@
+17-02-2015 v0.1.3
+-QPAD is now open sourced
+-Changed to semantic versioning
+
+27-01-2015 v2015.01.27.00
+-Added icon
+-Made UI Uniform across all tabs
+-Fixed window resize bug
+-Complete Full Screen Mode support
+-Resizeable window
+-Reduced minimum dimensions for smaller screens support
+-15% decrease in client size
+
+25-01-2015 v2015.01.25.01
+-Fixed bugs in the OTA updater
+-Fixed scrollbar in changelog
+
+25-01-2015 - v2015.01.25.00
+-Initial relase
+-Add OTA update feature
+-Minor Bugfixes
+-Slightly better exception handling
